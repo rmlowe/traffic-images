@@ -4,10 +4,15 @@
   "private": true,
   "homepage": "https://rmlowe.github.io/hello-world",
   "dependencies": {
+    "ajv": "^6.3.0",
+    "ajv-keywords": "^3.1.0",
+    "axios": "^0.18.0",
     "gh-pages": "^1.1.0",
+    "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-xml-parser": "^1.0.5"
   },
   "scripts": {
     "predeploy": "npm run build",

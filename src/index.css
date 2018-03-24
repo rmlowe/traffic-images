@@ -3,3 +3,28 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.search-bar {
+   margin: 20px;
+   text-align: center;
+}
+
+.search-bar input {
+   width: 75%;
+}
+
+.media-heading {
+   max-width: 320px;
+}
+
+.list-inline-item {
+   vertical-align: top;
+}
+
+.container {
+   text-align: center;
+}
+
+body {
+   text-align: center;
+}
