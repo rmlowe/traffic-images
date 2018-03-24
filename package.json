@@ -2,7 +2,7 @@
   "name": "hello-world",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rmlowe.github.io/hello-world",
+  "homepage": "https://rmlowe.github.io/traffic-images",
   "dependencies": {
     "ajv": "^6.3.0",
     "ajv-keywords": "^3.1.0",
