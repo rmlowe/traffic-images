@@ -33,6 +33,7 @@ class App extends Component {
          <div>
             <SearchBar onSearchTermChange={imageSearch} />
             <ImageList images={this.state.images} />
+            <footer class="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
       );
    }
