@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
 }
 
+/*
 .search-bar {
    margin: 20px;
    text-align: center;
@@ -12,8 +13,9 @@ body {
 .search-bar input {
    width: 75%;
 }
+*/
 
-.media-heading {
+figcaption {
    max-width: 320px;
 }
 

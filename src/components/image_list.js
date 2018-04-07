@@ -6,7 +6,8 @@ const ImageList = (props) => {
       return (
          <ImageListItem
             key={image.getElementsByTagName('key')[0].textContent}
-            image={image} />
+            image={image}
+            time={props.time}/>
       );
    });
 

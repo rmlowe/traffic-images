@@ -9,14 +9,21 @@ class App extends Component {
       super(props);
 
       this.state = {
-         images: []
+         images: [],
+         time: 0
       };
 
-      this.imageSearch('');
+      this.imageSearch({ term: '', language: 'En' });
+      setInterval(() => {
+         const time = new Date().getTime();
+         console.log(time);
+         this.setState({ time })
+      }, 10000);
    }
 
-   imageSearch(term) {
-      axios.get('Traffic_Camera_Locations_En.xml')
+   imageSearch({ term, language }) {
+      console.log(language);
+      axios.get(`Traffic_Camera_Locations_${language}.xml`)
          .then(response => {
             const images = Array.from(new DOMParser().parseFromString(response.data, 'application/xml').getElementsByTagName('image'));
             const results = images.filter(image => image.getElementsByTagName('description')[0].textContent.toLowerCase().includes(term.toLowerCase()));
@@ -32,8 +39,8 @@ class App extends Component {
       return (
          <div>
             <SearchBar onSearchTermChange={imageSearch} />
-            <ImageList images={this.state.images} />
-            <footer class="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
+            <ImageList images={this.state.images} time={this.state.time} />
+            <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
       );
    }
