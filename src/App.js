@@ -10,14 +10,21 @@ class App extends Component {
 
       this.state = {
          images: [],
-         time: 0
+         time: 0,
+         position: null
       };
+
+      if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(position => {
+            this.setState({ position });
+            navigator.geolocation.watchPosition(position =>
+               this.setState({ position }));
+         });
+      }
 
       this.imageSearch({ term: '', language: 'En' });
       setInterval(() => {
-         const time = new Date().getTime();
-         console.log(time);
-         this.setState({ time })
+         this.setState({ time: new Date().getTime() })
       }, 10000);
    }
 
@@ -35,10 +42,12 @@ class App extends Component {
 
    render() {
       const imageSearch = _.debounce((term) => { this.imageSearch(term) }, 300);
+      const { position } = this.state;
 
       return (
          <div>
             <SearchBar onSearchTermChange={imageSearch} />
+            {position && <div>Latitude: {position.coords.latitude}, Longitude: {position.coords.longitude}</div>}
             <ImageList images={this.state.images} time={this.state.time} />
             <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
