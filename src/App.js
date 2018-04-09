@@ -15,10 +15,9 @@ class App extends Component {
       };
 
       if (navigator.geolocation) {
-         navigator.geolocation.getCurrentPosition(position => {
+         navigator.geolocation.watchPosition(position => {
+            console.log('New position: ' + position);
             this.setState({ position });
-            navigator.geolocation.watchPosition(position =>
-               this.setState({ position }));
          });
       }
 
@@ -42,13 +41,11 @@ class App extends Component {
 
    render() {
       const imageSearch = _.debounce((term) => { this.imageSearch(term) }, 300);
-      const { position } = this.state;
 
       return (
          <div>
             <SearchBar onSearchTermChange={imageSearch} />
-            {position && <div>Latitude: {position.coords.latitude}, Longitude: {position.coords.longitude}</div>}
-            <ImageList images={this.state.images} time={this.state.time} />
+            <ImageList images={this.state.images} time={this.state.time} position={this.state.position} />
             <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
       );
