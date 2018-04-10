@@ -22,9 +22,16 @@ class App extends Component {
       }
 
       this.imageSearch({ term: '', language: 'En' });
-      setInterval(() => {
-         this.setState({ time: new Date().getTime() })
-      }, 10000);
+      // setInterval(() => {
+      //    this.setState({ time: new Date().getTime() });
+      // }, 10000);
+      const theObj = this;
+      (function loop() {
+         setTimeout(() => {
+            theObj.setState({ time: new Date().getTime() });
+            loop();
+         }, 10000);
+      })();
    }
 
    imageSearch({ term, language }) {
