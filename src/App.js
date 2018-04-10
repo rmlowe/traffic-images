@@ -16,15 +16,12 @@ class App extends Component {
 
       if (navigator.geolocation) {
          navigator.geolocation.watchPosition(position => {
-            console.log('New position: ' + position);
             this.setState({ position });
+            console.log('New position: ', position);
          });
       }
 
       this.imageSearch({ term: '', language: 'En' });
-      // setInterval(() => {
-      //    this.setState({ time: new Date().getTime() });
-      // }, 10000);
       const theObj = this;
       (function loop() {
          setTimeout(() => {
@@ -35,7 +32,6 @@ class App extends Component {
    }
 
    imageSearch({ term, language }) {
-      console.log(language);
       axios.get(`Traffic_Camera_Locations_${language}.xml`)
          .then(response => {
             const images = Array.from(new DOMParser().parseFromString(response.data, 'application/xml').getElementsByTagName('image'));

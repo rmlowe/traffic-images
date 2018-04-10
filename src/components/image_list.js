@@ -30,20 +30,22 @@ function imageDistance(position, image) {
    }
 }
 
-const ImageList = (props) => {
-   const imagesAndDistances = props.images.map(image => ({
+const ImageList = ({ images, position, time }) => {
+   const imagesAndDistances = images.map(image => ({
       image: image,
-      distance: imageDistance(props.position, image)
+      distance: imageDistance(position, image)
    }));
 
-   imagesAndDistances.sort((img1, img2) => img1.distance - img2.distance);
+   if (position) {
+      imagesAndDistances.sort((img1, img2) => img1.distance - img2.distance);
+   }
 
    const imageItems = imagesAndDistances.map(({ image, distance }) => {
       return (
          <ImageListItem
             key={image.getElementsByTagName('key')[0].textContent}
             image={image}
-            time={props.time}
+            time={time}
             distanceLabel={distance ? ` (${precisionRound(distance, 1)} km)` : ''}/>
       );
    });
