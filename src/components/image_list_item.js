@@ -7,7 +7,7 @@ const ImageListItem = ({image, time, distanceLabel}) => {
    return (
       <li className="list-inline-item">
          <figure className="figure">
-               <img className="figure-img img-fluid rounded" src={src} alt={`${description}${distanceLabel}`} />
+               <img className="figure-img img-fluid rounded" src={src} alt={`${description}${distanceLabel}`} height="240" width="320" />
                <figcaption className="figure-caption">{description}</figcaption>
          </figure>
       </li>
