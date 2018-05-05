@@ -1,8 +1,27 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+
 import SearchBar from './components/search_bar';
 import ImageList from './components/image_list';
+
+const MyMapComponent = withScriptjs(withGoogleMap(({ images }) => {
+   const markers = images.map(image => {
+      return (
+         <Marker position={{
+            lat: Number(image.getElementsByTagName('latitude')[0].textContent),
+            lng: Number(image.getElementsByTagName('longitude')[0].textContent)
+         }} />
+      );
+   });
+
+   return (
+      <GoogleMap defaultZoom={11} defaultCenter={{ lat: 22.3964, lng: 114.1095 }}>
+         {markers}
+      </GoogleMap>
+   );
+}));
 
 class App extends Component {
    constructor(props) {
@@ -48,6 +67,13 @@ class App extends Component {
       return (
          <div>
             <SearchBar onSearchTermChange={imageSearch} />
+            <MyMapComponent
+               images={this.state.images}
+               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+               loadingElement={<div style={{ height: `100%` }} />}
+               containerElement={<div style={{ height: `400px` }} />}
+               mapElement={<div style={{ height: `100%` }} />}
+            />
             <ImageList images={this.state.images} time={this.state.time} position={this.state.position} />
             <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
