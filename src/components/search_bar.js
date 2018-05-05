@@ -29,18 +29,20 @@ class SearchBar extends Component {
       const placeholder = langs.filter(lang => lang.code === this.state.language)[0].placeholder;
 
       return (
-         <div className="form-row m-1">
-            <div className="col">
-               <input
-                  className="form-control"
-                  value={this.state.term}
-                  onChange={event => this.onInputChange(event.target.value)}
-                  placeholder={placeholder} />
-            </div>
-            <div className="col-auto mt-1">
-               {radioButtons}
-            </div>
-         </div>
+         <nav className="navbar fixed-top form-row p-1">
+            {/* <div className="form-row m-1"> */}
+               <div className="col">
+                  <input
+                     className="form-control"
+                     value={this.state.term}
+                     onChange={event => this.onInputChange(event.target.value)}
+                     placeholder={placeholder} />
+               </div>
+               <div className="col-auto mt-1">
+                  {radioButtons}
+               </div>
+            {/* </div> */}
+         </nav>
       );
    }
 
