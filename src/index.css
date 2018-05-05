@@ -30,3 +30,14 @@ figcaption {
 body {
    text-align: center;
 }
+
+.list-inline {
+   padding-top: 60px;
+}
+
+.navbar {
+   background-color: LightGray;
+   border-bottom: DarkGray 3px solid;
+   opacity: 0.8;
+   width: 100%;
+}
