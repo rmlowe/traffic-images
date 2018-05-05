@@ -9,10 +9,13 @@ import ImageList from './components/image_list';
 const MyMapComponent = withScriptjs(withGoogleMap(({ images }) => {
    const markers = images.map(image => {
       return (
-         <Marker position={{
-            lat: Number(image.getElementsByTagName('latitude')[0].textContent),
-            lng: Number(image.getElementsByTagName('longitude')[0].textContent)
-         }} />
+         <Marker
+            key={image.getElementsByTagName('key')[0].textContent}
+            position={{
+               lat: Number(image.getElementsByTagName('latitude')[0].textContent),
+               lng: Number(image.getElementsByTagName('longitude')[0].textContent)
+            }}
+         />
       );
    });
 
