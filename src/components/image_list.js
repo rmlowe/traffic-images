@@ -30,7 +30,7 @@ function imageDistance(position, image) {
    }
 }
 
-const ImageList = ({ images, position, time }) => {
+const ImageList = ({ images, position, time, setActive, active }) => {
    const imagesAndDistances = images.map(image => ({
       image: image,
       distance: imageDistance(position, image)
@@ -41,12 +41,18 @@ const ImageList = ({ images, position, time }) => {
    }
 
    const imageItems = imagesAndDistances.map(({ image, distance }) => {
+      const key = image.getElementsByTagName('key')[0].textContent;
+
       return (
          <ImageListItem
-            key={image.getElementsByTagName('key')[0].textContent}
+            key={key}
             image={image}
             time={time}
-            distanceLabel={distance ? ` (${precisionRound(distance, 1)} km)` : ''}/>
+            distanceLabel={distance ? ` (${precisionRound(distance, 1)} km)` : ''}
+            onActivate={() => setActive(key)}
+            onDeactivate={() => setActive(null)}
+            isActive={key === active}
+         />
       );
    });
 

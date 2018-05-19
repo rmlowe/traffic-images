@@ -6,15 +6,24 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 import SearchBar from './components/search_bar';
 import ImageList from './components/image_list';
 
-const MyMapComponent = withScriptjs(withGoogleMap(({ images }) => {
+const MyMapComponent = withScriptjs(withGoogleMap(({ images, active }) => {
    const markers = images.map(image => {
+      const key = image.getElementsByTagName('key')[0].textContent;
+
+      // Markers: see https://stackoverflow.com/questions/7095574/google-maps-api-3-custom-marker-color-for-default-dot-marker/18623391#18623391
+      const icon = key === active
+         ? 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
+         : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
       return (
          <Marker
-            key={image.getElementsByTagName('key')[0].textContent}
+            key={key}
             position={{
                lat: Number(image.getElementsByTagName('latitude')[0].textContent),
                lng: Number(image.getElementsByTagName('longitude')[0].textContent)
             }}
+            onClick={() => console.log('Marker clicked: ' + key)}
+            icon={icon}
          />
       );
    });
@@ -72,12 +81,19 @@ class App extends Component {
             <SearchBar onSearchTermChange={imageSearch} />
             <MyMapComponent
                images={this.state.images}
+               active={this.state.active}
                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                loadingElement={<div style={{ height: `100%` }} />}
                containerElement={<div style={{ height: `400px` }} />}
                mapElement={<div style={{ height: `100%` }} />}
             />
-            <ImageList images={this.state.images} time={this.state.time} position={this.state.position} />
+            <ImageList
+               images={this.state.images}
+               time={this.state.time}
+               position={this.state.position}
+               setActive={key => this.setState({ active: key })}
+               active={this.state.active}
+            />
             <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
          </div>
       );

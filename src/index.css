@@ -30,3 +30,11 @@ figcaption {
 body {
    text-align: center;
 }
+
+.active {
+   background-color: LightGray;
+}
+
+.figure {
+   padding: 2px;
+}
