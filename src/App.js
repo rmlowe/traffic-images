@@ -82,7 +82,7 @@ class App extends Component {
             <MyMapComponent
                images={this.state.images}
                active={this.state.active}
-               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGr35_Kh7izigi3n4tjw0WwH6IilLaNIw&v=3.exp&libraries=geometry,drawing,places"
                loadingElement={<div style={{ height: `100%` }} />}
                containerElement={<div style={{ height: `400px` }} />}
                mapElement={<div style={{ height: `100%` }} />}
