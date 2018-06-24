@@ -38,3 +38,8 @@ body {
 .figure {
    padding: 2px;
 }
+
+.scrollable {
+   height: 100%;
+   overflow: scroll;
+}

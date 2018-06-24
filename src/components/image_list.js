@@ -57,7 +57,7 @@ const ImageList = ({ images, position, time, setActive, active }) => {
    });
 
    return (
-      <ul className="list-inline">
+      <ul className="list-group">
          {imageItems}
       </ul>
    );

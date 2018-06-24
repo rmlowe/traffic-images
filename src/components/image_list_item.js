@@ -6,7 +6,7 @@ const ImageListItem = ({image, time, distanceLabel, onActivate, onDeactivate, is
    const key = image.getElementsByTagName('key')[0].textContent;
 
    return (
-      <li className="list-inline-item">
+      <li className="list-group-item">
          <figure
             className={'figure' + (isActive ? ' active' : '')}
             onMouseOver={event => onActivate()}

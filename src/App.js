@@ -77,24 +77,33 @@ class App extends Component {
       const imageSearch = _.debounce((term) => { this.imageSearch(term) }, 300);
 
       return (
-         <div>
+         <div style={{ height: `100%` }}>
             <SearchBar onSearchTermChange={imageSearch} />
-            <MyMapComponent
-               images={this.state.images}
-               active={this.state.active}
-               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGr35_Kh7izigi3n4tjw0WwH6IilLaNIw&v=3.exp&libraries=geometry,drawing,places"
-               loadingElement={<div style={{ height: `100%` }} />}
-               containerElement={<div style={{ height: `400px` }} />}
-               mapElement={<div style={{ height: `100%` }} />}
-            />
-            <ImageList
-               images={this.state.images}
-               time={this.state.time}
-               position={this.state.position}
-               setActive={key => this.setState({ active: key })}
-               active={this.state.active}
-            />
-            <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
+            <div className="container-fluid" style={{ height: `94%` }}>
+               <div className="row no-gutters" style={{ height: `100%` }}>
+                  <div className="col-md order-md-last" style={{ height: `100%` }}>
+                     <MyMapComponent
+                        images={this.state.images}
+                        active={this.state.active}
+                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGr35_Kh7izigi3n4tjw0WwH6IilLaNIw&v=3.exp&libraries=geometry,drawing,places"
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        //containerElement={<div style={{ height: `400px` }} />}
+                        containerElement={<div style={{ height: `100%` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                     />
+                  </div>
+                  <div className="col-md-auto scrollable" style={{ height: `100%`, overflow: 'scroll' }}>
+                     <ImageList
+                        images={this.state.images}
+                        time={this.state.time}
+                        position={this.state.position}
+                        setActive={key => this.setState({ active: key })}
+                        active={this.state.active}
+                     />
+                     <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
+                  </div>
+               </div>
+            </div>
          </div>
       );
    }

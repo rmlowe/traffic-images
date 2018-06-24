@@ -35,7 +35,9 @@ class SearchBar extends Component {
                   className="form-control"
                   value={this.state.term}
                   onChange={event => this.onInputChange(event.target.value)}
-                  placeholder={placeholder} />
+                  placeholder={placeholder}
+                  autoFocus
+               />
             </div>
             <div className="col-auto mt-1">
                {radioButtons}
