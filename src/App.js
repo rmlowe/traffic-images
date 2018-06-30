@@ -6,7 +6,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 import SearchBar from './components/search_bar';
 import ImageList from './components/image_list';
 
-const MyMapComponent = withScriptjs(withGoogleMap(({ images, active }) => {
+const MyMapComponent = withScriptjs(withGoogleMap(({ images, active, setActive }) => {
    const markers = images.map(image => {
       const key = image.getElementsByTagName('key')[0].textContent;
 
@@ -22,7 +22,7 @@ const MyMapComponent = withScriptjs(withGoogleMap(({ images, active }) => {
                lat: Number(image.getElementsByTagName('latitude')[0].textContent),
                lng: Number(image.getElementsByTagName('longitude')[0].textContent)
             }}
-            onClick={() => console.log('Marker clicked: ' + key)}
+            onClick={() => setActive(key)}
             icon={icon}
          />
       );
@@ -75,6 +75,7 @@ class App extends Component {
 
    render() {
       const imageSearch = _.debounce((term) => { this.imageSearch(term) }, 300);
+      const setActive = key => this.setState({ active: key });
 
       return (
          <div style={{ height: `100%` }}>
@@ -90,6 +91,7 @@ class App extends Component {
                         //containerElement={<div style={{ height: `400px` }} />}
                         containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
+                        setActive={setActive}
                      />
                   </div>
                   <div className="col-md-auto scrollable" style={{ height: `100%`, overflow: 'scroll' }}>
@@ -97,8 +99,13 @@ class App extends Component {
                         images={this.state.images}
                         time={this.state.time}
                         position={this.state.position}
-                        setActive={key => this.setState({ active: key })}
+                        setActive={setActive}
                         active={this.state.active}
+                        liRef={node => {
+                           if (node) {
+                              //node.scrollIntoView();   
+                           }
+                        }}
                      />
                      <footer className="footer">Created by <a href="https://twitter.com/robertlowe">@robertlowe</a></footer>
                   </div>

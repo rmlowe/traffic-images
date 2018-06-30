@@ -30,7 +30,7 @@ function imageDistance(position, image) {
    }
 }
 
-const ImageList = ({ images, position, time, setActive, active }) => {
+const ImageList = ({ images, position, time, setActive, active, liRef }) => {
    const imagesAndDistances = images.map(image => ({
       image: image,
       distance: imageDistance(position, image)
@@ -52,6 +52,11 @@ const ImageList = ({ images, position, time, setActive, active }) => {
             onActivate={() => setActive(key)}
             onDeactivate={() => setActive(null)}
             isActive={key === active}
+            liRef={node => {
+               if (key === active) {
+                  liRef(node);
+               }
+            }}
          />
       );
    });
